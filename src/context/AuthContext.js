@@ -17,9 +17,6 @@ export const useAuth = () => {
 
 export const AuthProv = ({ children }) => {
   const [user, setUser] = useState(null);
-
-  const [loading, setLoading] = useState(true);
-
   const signup = async (email, password) => {
     return await createUserWithEmailAndPassword(auth, email, password);
   };
@@ -32,7 +29,6 @@ export const AuthProv = ({ children }) => {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      //setLoading(false);
     });
   }, []);
 
