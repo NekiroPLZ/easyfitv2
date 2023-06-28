@@ -5,27 +5,11 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-  getDoc,
-  setDoc,
-} from "firebase/firestore";
-import { db } from "../Credentials";
+
 import { auth } from "../Credentials";
 export const authContext = createContext();
 
-export const dbContext = createContext();
-
-export const useDb = () => {
-  const context = useContext(dbContext);
-  return context;
-};
-
+//CustomHook
 export const useAuth = () => {
   const context = useContext(authContext);
   return context;
@@ -48,13 +32,13 @@ export const AuthProv = ({ children }) => {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+      //setLoading(false);
     });
   }, []);
 
   return (
-    <authContext.Provider value={{ signup, login, user, logout, loading }}>
+    <authContext.Provider value={{ signup, login, user, logout}}>
       {children}
     </authContext.Provider>
-  );
+  );  
 };

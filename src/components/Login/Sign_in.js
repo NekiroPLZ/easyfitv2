@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 //Iconos/Imagen
-// import EasyFit from "../imagen/EasyFit.png";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-// import { faEye } from "@fortawesome/free-solid-svg-icons";
+import EasyFit from "../imagen/EasyFit.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 import "./Sign.css";
 
@@ -14,7 +14,10 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function Sign_in() {
+
   const navigate = useNavigate();
+  const [Style, SetStyle] = useState(faEyeSlash)
+  const [TypeInput, SetTypeInput] = useState("Password");
   const [adminCheck, setAdminCheck] = useState(true);
   const [adminPassword, setAdminPassword] = useState("admin");
   const [user, setUser] = useState({
@@ -22,6 +25,8 @@ function Sign_in() {
     password: "",
   });
 
+
+  //Seteo de usuario contraseña y lectura del name del imput
   const changeHandler = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
@@ -39,6 +44,8 @@ function Sign_in() {
   const { login } = useAuth();
 
   const submitUserHandler = async (event) => {
+
+    if (user.email.includes('@' && ".com")) {
     event.preventDefault();
     if (adminCheck) {
       try {
@@ -55,14 +62,21 @@ function Sign_in() {
         alert(error);
       }
     }
-  };
+  }else{alert("Falta .com")}};
   const goToRegisterHandler = (event) => {
     event.preventDefault();
     navigate("/register");
   };
 
   return (
-    <div className="row container p-4">
+    
+    <>
+
+       <div className="Sign">
+        <a href="/">Home</a>
+        <img src={EasyFit} width={80} height={160}></img>
+      </div>
+      <div className="Main">
       <div className="col-md-7">
         <div className="styles-border">
           <div
@@ -126,11 +140,16 @@ function Sign_in() {
             <div className="mb-3">
               <label htmlFor="password">Password:</label>
               <input
-                type="password"
+                type={TypeInput}
                 placeholder="Enter your password"
                 name="password"
                 onChange={changeHandler}
               ></input>
+                 {/* Visualicacion de contraseña + icono*/}
+        <FontAwesomeIcon icon={Style}
+          className="icon"
+          onClick={() => (SetTypeInput(Style === faEyeSlash ? "Text" : "Password"), SetStyle(Style === faEyeSlash ? faEye : faEyeSlash))}
+        />
             </div>
             <div>
               <input
@@ -149,12 +168,14 @@ function Sign_in() {
               className="btn btn-secondary mt-4 form-control"
               onClick={goToRegisterHandler}
             >
-              <h2>Register</h2>
+              <h2>Register</h2> 
             </button>
+            
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 }
 

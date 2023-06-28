@@ -8,7 +8,7 @@ function NavBar() {
     <div className="NavBar">
       <h1>Welcome to EasyFit</h1>
       <a href="/Login">Sing_in</a>
-
+      <a href="/Register">Sing_up</a>
       <img src={EasyFit} width={80} height={160}></img>
     </div>
   );

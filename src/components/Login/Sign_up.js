@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+
+import EasyFit from "../imagen/EasyFit.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+
+
 function Sign_up() {
+
+  const [Style, SetStyle] = useState(faEyeSlash)
+  const [TypeInput, SetTypeInput] = useState("Password");
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -25,6 +35,10 @@ function Sign_up() {
 
   return (
     <div>
+          <div className="Sign">
+        <a href="/">Home</a>
+        <img src={EasyFit} width={80} height={160}></img>
+      </div>
       <form onSubmit={submitHandler}>
         <label htmlFor="email">Email:</label>
         <input
@@ -36,11 +50,15 @@ function Sign_up() {
 
         <label htmlFor="password">Password:</label>
         <input
-          type="password"
+          type={TypeInput}
           placeholder="Enter your password"
           name="password"
           onChange={changeHandler}
         ></input>
+          <FontAwesomeIcon icon={Style}
+          className="icon"
+          onClick={() => (SetTypeInput(Style === faEyeSlash ? "Text" : "Password"), SetStyle(Style === faEyeSlash ? faEye : faEyeSlash))}
+        />
 
         <button>Register</button>
       </form>

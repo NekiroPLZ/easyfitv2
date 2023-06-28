@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import EasyFit from "../imagen/EasyFit.png";
 import { firebaseApp } from "../../Credentials";
 import SearchBar from "../SearchBar/SearchBar";
 import { useAuth } from "../../context/AuthContext";
+import "./UserPages.css";
 import {
   getFirestore,
   collection,
@@ -97,6 +99,11 @@ function DefaultUser() {
   console.log(logout);
   console.log(loading);
   return (
+    <>
+    <div className="UserNavBar">
+    <a href="/">Home</a>
+    <img src={EasyFit} width={80} height={160}></img>
+  </div>
     <div>
       <SearchBar />
       <div>
@@ -159,6 +166,7 @@ function DefaultUser() {
       </div>
       <button onClick={logouthandler}>Log Out</button>
     </div>
+    </>
   );
 }
 
