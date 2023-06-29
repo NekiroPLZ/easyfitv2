@@ -30,12 +30,15 @@ function DefaultUser() {
 
   const inputCapture = (event) => {
     const { name, value } = event.target;
-    setFood({ ...food, [name]: value });
+      setFood({ ...food, [name]: value });
   };
 
+  //Formulario comida
   const saveData = async (event) => {
     event.preventDefault();
-
+    if(initialValues.userName === "" || initialValues.food === "" || initialValues.calories === ""){
+      alert("fill in the field")
+    }else{
     if (selectId === "") {
       try {
         await addDoc(collection(db, "Food"), {
@@ -51,6 +54,7 @@ function DefaultUser() {
     setFood(initialValues);
     setSelectId("");
   };
+}
 
   useEffect(() => {
     getFood();

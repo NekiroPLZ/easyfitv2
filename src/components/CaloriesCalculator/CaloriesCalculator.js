@@ -88,7 +88,7 @@ function CaloriesCalculator() {
           </select>
 
           {!Validations.gender && ShowError === 1 && (
-            <p>error you must choose a gender</p>
+            <p className="error">error you must choose a gender</p>
           )}
         </div>
 
@@ -104,7 +104,7 @@ function CaloriesCalculator() {
             }}
           ></input>
           {!Validations.age && ShowError === 1 && (
-            <p>error you must enter your age real</p>
+            <p className="error">error you must enter your age real</p>
           )}
         </div>
         {/* Altura */}
@@ -119,7 +119,7 @@ function CaloriesCalculator() {
             }}
           ></input>
           {!Validations.height && ShowError === 1 && (
-            <p>error you must enter your height real</p>
+            <p className="error">error you must enter your height real</p>
           )}
         </div>
 
@@ -135,7 +135,7 @@ function CaloriesCalculator() {
             }}
           ></input>
           {!Validations.weight && ShowError === 1 && (
-            <p>error you must enter your weight real</p>
+            <p className="error">error you must enter your weight real</p>
           )}
         </div>
         {/* Actividad Fisica*/}
@@ -164,7 +164,7 @@ function CaloriesCalculator() {
             </option>
           </select>
           {!Validations.exercise && ShowError === 1 && (
-            <p>error you must enter your routine</p>
+            <p className="error">error you must enter your routine</p>
           )}
         </div>
       </form>

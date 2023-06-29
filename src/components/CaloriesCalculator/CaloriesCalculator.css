@@ -3,7 +3,7 @@ button {
   color: black;
 }
 
-p {
+.error {
   font-size: 12px;
   color: rgb(161, 48, 48);
   margin: 0px;
