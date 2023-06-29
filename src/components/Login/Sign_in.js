@@ -12,15 +12,7 @@ import secondImage from "../Image/Ronnie.jpg";
 import thirdImage from "../Image/Cbum.jpg";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../Credentials";
 
-
-import {
-
-  GoogleAuthProvider,
-  signInWithPopup
-  
-} from "firebase/auth";
 function Sign_in() {
 
   const navigate = useNavigate();
@@ -38,6 +30,8 @@ function Sign_in() {
   const changeHandler = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
+
+  //CheckBoxs
   const checkBoxHandler = () => {
     const adminCode = window.prompt("Enter admin code");
     if (adminCode === adminPassword) {
@@ -45,12 +39,11 @@ function Sign_in() {
     } else {
       alert("Incorrect Code");
     }
-
-    console.log(adminCheck);
   };
  
   const { login, logingoogle} = useAuth();
 
+  //Boton de login con google
   const LoginGoogleHandler = async(event) =>{
     
     event.preventDefault();
@@ -65,12 +58,13 @@ function Sign_in() {
     } else {
       try {
         await await logingoogle()
-        navigate("/UserInterface");
+        navigate("/AdminInterface");
       } catch (error) {
         alert(error);
       }
     }
   }
+  //Boton de login 
   const submitUserHandler = async (event) => {
 
     if (user.email.includes('@' && ".com")) {
@@ -90,7 +84,9 @@ function Sign_in() {
         alert(error);
       }
     }
-  }else{alert("Falta .com")}};
+  }else{alert("Falta .com")}
+  };
+  //Boton de Redirecion 
   const goToRegisterHandler = (event) => {
     event.preventDefault();
     navigate("/register");
@@ -174,7 +170,7 @@ function Sign_in() {
                 name="password"
                 onChange={changeHandler}
               ></input>
-                 {/* Visualicacion de contraseña + icono*/}
+                
         <FontAwesomeIcon icon={Style}
           className="icon"
           onClick={() => (SetTypeInput(Style === faEyeSlash ? "Text" : "Password"), SetStyle(Style === faEyeSlash ? faEye : faEyeSlash))}

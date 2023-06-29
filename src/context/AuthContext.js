@@ -8,8 +8,8 @@
     signOut
     
   } from "firebase/auth";
-
   import { auth } from "../Credentials";
+
   export const authContext = createContext();
 
   //CustomHook
@@ -17,9 +17,11 @@
     const context = useContext(authContext);
     return context;
   };
-
+  
   export const AuthProv = ({ children }) => {
+
     const [user, setUser] = useState(null);
+    //Logins y Registers
     const signup = async (email, password) => {
       return await createUserWithEmailAndPassword(auth, email, password);
     };
