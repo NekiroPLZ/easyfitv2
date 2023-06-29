@@ -12,7 +12,15 @@ import secondImage from "../Image/Ronnie.jpg";
 import thirdImage from "../Image/Cbum.jpg";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../Credentials";
 
+
+import {
+
+  GoogleAuthProvider,
+  signInWithPopup
+  
+} from "firebase/auth";
 function Sign_in() {
 
   const navigate = useNavigate();
@@ -40,9 +48,29 @@ function Sign_in() {
 
     console.log(adminCheck);
   };
+ 
+  const { login, logingoogle} = useAuth();
 
-  const { login } = useAuth();
-
+  const LoginGoogleHandler = async(event) =>{
+    
+    event.preventDefault();
+    if (adminCheck) {
+      try {
+        await await logingoogle()
+        navigate("/UserInterface");
+        
+      } catch (error) {
+        alert(error);
+      }
+    } else {
+      try {
+        await await logingoogle()
+        navigate("/UserInterface");
+      } catch (error) {
+        alert(error);
+      }
+    }
+  }
   const submitUserHandler = async (event) => {
 
     if (user.email.includes('@' && ".com")) {
@@ -76,6 +104,8 @@ function Sign_in() {
         <a href="/">Home</a>
         <img src={EasyFit} width={80} height={160}></img>
       </div>
+
+      
       <div className="Main">
       <div className="col-md-7">
         <div className="styles-border">
@@ -136,7 +166,6 @@ function Sign_in() {
                 onChange={changeHandler}
               ></input>
             </div>
-
             <div className="mb-3">
               <label htmlFor="password">Password:</label>
               <input
@@ -163,7 +192,11 @@ function Sign_in() {
             </div>
             <button className="btn btn-primary">Sign In</button>
           </form>
+
+          <button onClick={LoginGoogleHandler}>Login with Google</button>
+
           <div className="form-group">
+            
             <button
               className="btn btn-secondary mt-4 form-control"
               onClick={goToRegisterHandler}

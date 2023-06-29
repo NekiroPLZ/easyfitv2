@@ -90,14 +90,12 @@ function DefaultUser() {
   });
 
   //VALIDATIONS AND LOGOUT
-  const { user, logout, loading } = useAuth();
-  console.log(user);
+  const { user, logout} = useAuth();
+  
   const logouthandler = async () => {
     await logout();
   };
-  if (loading) return <h2>loading</h2>;
-  console.log(logout);
-  console.log(loading);
+
   return (
     <>
     <div className="UserNavBar">

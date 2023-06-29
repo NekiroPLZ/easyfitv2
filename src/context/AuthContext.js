@@ -1,40 +1,48 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from "firebase/auth";
+  import { createContext, useContext, useEffect, useState } from "react";
+  import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut
+    
+  } from "firebase/auth";
 
-import { auth } from "../Credentials";
-export const authContext = createContext();
+  import { auth } from "../Credentials";
+  export const authContext = createContext();
 
-//CustomHook
-export const useAuth = () => {
-  const context = useContext(authContext);
-  return context;
-};
-
-export const AuthProv = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const signup = async (email, password) => {
-    return await createUserWithEmailAndPassword(auth, email, password);
-  };
-  const login = async (email, password) => {
-    return await signInWithEmailAndPassword(auth, email, password);
+  //CustomHook
+  export const useAuth = () => {
+    const context = useContext(authContext);
+    return context;
   };
 
-  const logout = () => signOut(auth);
+  export const AuthProv = ({ children }) => {
+    const [user, setUser] = useState(null);
+    const signup = async (email, password) => {
+      return await createUserWithEmailAndPassword(auth, email, password);
+    };
+    const login = async (email, password) => {
+      return await signInWithEmailAndPassword(auth, email, password);
+    };
+    const logingoogle = async()=>{
+      const provider = new GoogleAuthProvider();
+        return await signInWithPopup(auth, provider);
+    } 
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-  }, []);
+    const logout = () => signOut(auth);
 
-  return (
-    <authContext.Provider value={{ signup, login, user, logout}}>
-      {children}
-    </authContext.Provider>
-  );  
-};
+    useEffect(() => {
+
+      onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+      });
+    }, []);
+
+    return (
+      <authContext.Provider value={{signup, login, user, logout, logingoogle}}>
+        {children}
+      </authContext.Provider>
+    );  
+  };
