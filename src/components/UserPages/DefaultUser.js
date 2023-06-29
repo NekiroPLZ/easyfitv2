@@ -4,6 +4,7 @@ import { firebaseApp } from "../../Credentials";
 import SearchBar from "../SearchBar/SearchBar";
 import { useAuth } from "../../context/AuthContext";
 import "./UserPages.css";
+import { UseTheme } from "../../context/ThemeContext";
 import {
   getFirestore,
   collection,
@@ -13,7 +14,6 @@ import {
   deleteDoc,
   getDoc,
   updateDoc,
-  setDoc,
 } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
 
@@ -95,7 +95,10 @@ function DefaultUser() {
   const logouthandler = async () => {
     await logout();
   };
-
+    //Cambiar fondo
+    const {Theme, ThemeHandler,Theme1} = UseTheme()
+    document.body.style.backgroundColor = Theme1.background;
+    document.body.style.color =  Theme1.textColor;
   return (
     <>
     <div className="UserNavBar">
@@ -163,6 +166,7 @@ function DefaultUser() {
         </div>
       </div>
       <button onClick={logouthandler}>Log Out</button>
+      <button onClick={ThemeHandler}>{Theme === "dark" ? "Light Mode" : "Dark Mode"}</button>  
     </div>
     </>
   );

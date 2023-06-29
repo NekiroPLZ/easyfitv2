@@ -12,6 +12,9 @@ import DefaultUser from "./components/UserPages/DefaultUser";
 import AdminInterface from "./components/UserPages/AdminInterface";
 import { AuthProv } from "./context/AuthContext";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import { ThemeProvider}from "./context/ThemeContext";
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -51,12 +54,14 @@ const router = createBrowserRouter([
     errorElement: <h1>Error</h1>,
   },
 ]);
-function App() {
+function App() { 
   return (
     <div>
+      <ThemeProvider>
       <AuthProv>
         <RouterProvider router={router}></RouterProvider>
       </AuthProv>
+      </ThemeProvider>
     </div>
   );
 }

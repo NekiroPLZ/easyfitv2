@@ -6,7 +6,7 @@ import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 import "./Sign.css";
-
+import { UseTheme } from "../../context/ThemeContext";
 import firstImage from "../Image/Jay-Cutler-quad-stomp-1.png";
 import secondImage from "../Image/Ronnie.jpg";
 import thirdImage from "../Image/Cbum.jpg";
@@ -91,10 +91,13 @@ function Sign_in() {
     event.preventDefault();
     navigate("/register");
   };
-
+  //Modo oscuro
+  const {Theme, ThemeHandler, Theme1} = UseTheme()
+  document.body.style.backgroundColor = Theme1.background;
+  document.body.style.color =  Theme1.textColor;
   return (
     
-    <>
+  <> 
 
        <div className="Sign">
         <a href="/">Home</a>
@@ -200,11 +203,15 @@ function Sign_in() {
               <h2>Register</h2> 
             </button>
             
+            <button onClick={ThemeHandler}>{Theme === "dark" ? "Light Mode" : "Dark Mode"}</button>  
           </div>
         </div>
       </div>
     </div>
-    </>
+
+
+  </>
+  
   );
 }
 
