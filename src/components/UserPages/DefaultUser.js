@@ -4,6 +4,7 @@ import { firebaseApp } from "../../Credentials";
 import SearchBar from "../SearchBar/SearchBar";
 import { useAuth } from "../../context/AuthContext";
 import "./UserPages.css";
+import { UseTheme } from "../../context/ThemeContext";
 import {
   getFirestore,
   collection,
@@ -13,7 +14,6 @@ import {
   deleteDoc,
   getDoc,
   updateDoc,
-  setDoc,
 } from "firebase/firestore";
 const db = getFirestore(firebaseApp);
 
@@ -39,23 +39,31 @@ function DefaultUser() {
     setFood({ ...food, [name]: value });
   };
 
+  //Formulario comida
   const saveData = async (event) => {
     event.preventDefault();
-
-    if (selectId === "") {
-      try {
-        await addDoc(collection(db, "Food"), {
-          ...food,
-        });
-      } catch (error) {
-        console.log(error);
-      }
+    if (
+      initialValues.userName === "" ||
+      initialValues.food === "" ||
+      initialValues.calories === ""
+    ) {
+      alert("fill in the field");
     } else {
-      await updateDoc(doc(db, "Food", selectId), { ...food });
-    }
+      if (selectId === "") {
+        try {
+          await addDoc(collection(db, "Food"), {
+            ...food,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        await updateDoc(doc(db, "Food", selectId), { ...food });
+      }
 
-    setFood(initialValues);
-    setSelectId("");
+      setFood(initialValues);
+      setSelectId("");
+    }
   };
 
   useEffect(() => {
@@ -96,14 +104,15 @@ function DefaultUser() {
   });
 
   //VALIDATIONS AND LOGOUT
-  const { user, logout, loading } = useAuth();
-  console.log(user);
+  const { user, logout } = useAuth();
+
   const logouthandler = async () => {
     await logout();
   };
-  if (loading) return <h2>loading</h2>;
-  console.log(logout);
-  console.log(loading);
+  //Cambiar fondo
+  const { Theme, ThemeHandler, Theme1 } = UseTheme();
+  document.body.style.backgroundColor = Theme1.background;
+  document.body.style.color = Theme1.textColor;
   return (
     <>
       <div className="UserNavBar">
@@ -219,6 +228,10 @@ function DefaultUser() {
         </div>
         <button onClick={logouthandler}>Log Out</button>
       </div>
+      <button onClick={logouthandler}>Log Out</button>
+      <button onClick={ThemeHandler}>
+        {Theme === "dark" ? "Light Mode" : "Dark Mode"}
+      </button>
     </>
   );
 }

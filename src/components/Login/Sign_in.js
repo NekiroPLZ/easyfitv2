@@ -6,7 +6,7 @@ import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 import "./Sign.css";
-
+import { UseTheme } from "../../context/ThemeContext";
 import firstImage from "../Image/Jay-Cutler-quad-stomp-1.png";
 import secondImage from "../Image/Ronnie.jpg";
 import thirdImage from "../Image/Cbum.jpg";
@@ -30,6 +30,8 @@ function Sign_in() {
   const changeHandler = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
+
+  //CheckBoxs
   const checkBoxHandler = () => {
     const adminCode = window.prompt("Enter admin code");
     if (adminCode === adminPassword) {
@@ -37,12 +39,32 @@ function Sign_in() {
     } else {
       alert("Incorrect Code");
     }
-
-    console.log(adminCheck);
   };
+ 
+  const { login, logingoogle} = useAuth();
 
-  const { login } = useAuth();
-
+  //Boton de login con google
+  const LoginGoogleHandler = async(event) =>{
+    
+    event.preventDefault();
+    if (adminCheck) {
+      try {
+        await await logingoogle()
+        navigate("/UserInterface");
+        
+      } catch (error) {
+        alert(error);
+      }
+    } else {
+      try {
+        await await logingoogle()
+        navigate("/AdminInterface");
+      } catch (error) {
+        alert(error);
+      }
+    }
+  }
+  //Boton de login 
   const submitUserHandler = async (event) => {
 
     if (user.email.includes('@' && ".com")) {
@@ -62,20 +84,27 @@ function Sign_in() {
         alert(error);
       }
     }
-  }else{alert("Falta .com")}};
+  }else{alert("Falta .com")}
+  };
+  //Boton de Redirecion 
   const goToRegisterHandler = (event) => {
     event.preventDefault();
     navigate("/register");
   };
-
+  //Modo oscuro
+  const {Theme, ThemeHandler, Theme1} = UseTheme()
+  document.body.style.backgroundColor = Theme1.background;
+  document.body.style.color =  Theme1.textColor;
   return (
     
-    <>
+  <> 
 
        <div className="Sign">
         <a href="/">Home</a>
         <img src={EasyFit} width={80} height={160}></img>
       </div>
+
+      
       <div className="Main">
       <div className="col-md-7">
         <div className="styles-border">
@@ -136,7 +165,6 @@ function Sign_in() {
                 onChange={changeHandler}
               ></input>
             </div>
-
             <div className="mb-3">
               <label htmlFor="password">Password:</label>
               <input
@@ -145,7 +173,7 @@ function Sign_in() {
                 name="password"
                 onChange={changeHandler}
               ></input>
-                 {/* Visualicacion de contraseña + icono*/}
+                
         <FontAwesomeIcon icon={Style}
           className="icon"
           onClick={() => (SetTypeInput(Style === faEyeSlash ? "Text" : "Password"), SetStyle(Style === faEyeSlash ? faEye : faEyeSlash))}
@@ -163,7 +191,11 @@ function Sign_in() {
             </div>
             <button className="btn btn-primary">Sign In</button>
           </form>
+
+          <button onClick={LoginGoogleHandler}>Login with Google</button>
+
           <div className="form-group">
+            
             <button
               className="btn btn-secondary mt-4 form-control"
               onClick={goToRegisterHandler}
@@ -171,11 +203,15 @@ function Sign_in() {
               <h2>Register</h2> 
             </button>
             
+            <button onClick={ThemeHandler}>{Theme === "dark" ? "Light Mode" : "Dark Mode"}</button>  
           </div>
         </div>
       </div>
     </div>
-    </>
+
+
+  </>
+  
   );
 }
 

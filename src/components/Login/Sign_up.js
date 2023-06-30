@@ -6,10 +6,9 @@ import EasyFit from "../imagen/EasyFit.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-
+import { UseTheme } from "../../context/ThemeContext";
 
 function Sign_up() {
-
   const [Style, SetStyle] = useState(faEyeSlash)
   const [TypeInput, SetTypeInput] = useState("Password");
   const navigate = useNavigate();
@@ -32,9 +31,13 @@ function Sign_up() {
       alert(error);
     }
   };
+  //Modo oscuro
+  const {Theme, ThemeHandler, Theme1} = UseTheme()
+  document.body.style.backgroundColor = Theme1.background;
+  document.body.style.color =  Theme1.textColor;
 
   return (
-    <div>
+    <div> 
           <div className="Sign">
         <a href="/">Home</a>
         <img src={EasyFit} width={80} height={160}></img>
@@ -62,6 +65,7 @@ function Sign_up() {
 
         <button>Register</button>
       </form>
+      <button onClick={ThemeHandler}>{Theme === "dark" ? "Light Mode" : "Dark Mode"}</button>
     </div>
   );
 }
