@@ -29,7 +29,6 @@ function AdminInterface() {
   };
   const saveData = async (event) => {
     event.preventDefault();
-
     try {
       await addDoc(collection(db, "Blog"), {
         ...blog,

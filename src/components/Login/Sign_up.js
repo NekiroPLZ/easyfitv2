@@ -24,12 +24,13 @@ function Sign_up() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    if (user.email.includes('@' && ".com")) {
     try {
       await signup(user.email, user.password);
       navigate("/");
     } catch (error) {
       alert(error);
-    }
+    } }else{alert("Falta .com o Ingresar email")}
   };
   //Modo oscuro
   const {Theme, ThemeHandler, Theme1} = UseTheme()

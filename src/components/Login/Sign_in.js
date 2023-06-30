@@ -84,7 +84,7 @@ function Sign_in() {
         alert(error);
       }
     }
-  }else{alert("Falta .com")}
+  }else{alert("Falta .com o ingresar email")}
   };
   //Boton de Redirecion 
   const goToRegisterHandler = (event) => {
