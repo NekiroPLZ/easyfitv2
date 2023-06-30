@@ -43,9 +43,9 @@ function CaloriesCalculator() {
       //Calcula las calorias segun hombre o mujer
       const Calories =
         GenderValue === "Male"
-          ? 66 + (13.7 * WeightValue + 5 * HeightValue - 6.8 * AgeValue)
+          ? 10 * WeightValue + 6.25 * HeightValue - 5 * AgeValue + 5
           : GenderValue === "Female"
-          ? 655 + (9.6 * WeightValue + 1.8 * HeightValue - 4.7 * AgeValue)
+          ? 10 * WeightValue + 6.25 * HeightValue - 5 * AgeValue - 161
           : null;
 
       //Calcula las calorias segun la actividad fisica
@@ -70,106 +70,141 @@ function CaloriesCalculator() {
 
   return (
     <div>
-      <form>
-        {/* Genero */}
-        <div>
-          <label>gender:</label>
-          <select
-            value={GenderValue}
-            onChange={(event) => {
-              SetGenderValue(event.target.value);
-            }}
-          >
-            <option value="" disabled>
-              Select your gender
-            </option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-
-          {!Validations.gender && ShowError === 1 && (
-            <p className="error">error you must choose a gender</p>
-          )}
+      {/* Mensajes */}
+      <div className="app">
+        <div className="container mt-5">
+          <h1 className="text-center text-black mb-4">
+            Enter your information to calculate your calories
+          </h1>
+          <div className="row d-flex justify-content-center">
+            <div className="col-md-8">
+              <div className="bg-white">
+                <div className="tab-content" id="myTabContent">
+                  <div
+                    className="tab-pane fade active show"
+                    id="faq_tab_1"
+                    role="tabpanel"
+                    aria-labelledby="faq_tab_1-tab"
+                  >
+                    <div className="container p-3">
+                      <div className="input-group mb-3">
+                        <select
+                          value={GenderValue}
+                          className="form-control"
+                          placeholder="Gender"
+                          onChange={(event) => {
+                            SetGenderValue(event.target.value);
+                          }}
+                        >
+                          {" "}
+                          <option value="" disabled>
+                            Select your gender
+                          </option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
+                        {!Validations.gender && ShowError === 1 && (
+                          <p className="error">
+                            error you must choose a gender
+                          </p>
+                        )}
+                        {/*age*/}
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="Enter your age"
+                          min="1"
+                          max="90"
+                          onChange={(event) => {
+                            SetAgeValue(event.target.value);
+                          }}
+                        />{" "}
+                        {!Validations.age && ShowError === 1 && (
+                          <p className="error">
+                            error you must enter your age real
+                          </p>
+                        )}{" "}
+                      </div>
+                      <div className="input-group mb-3">
+                        {" "}
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="Enter your height (cm)"
+                          min="50"
+                          max="200"
+                          onChange={(event) => {
+                            SetHeightValue(event.target.value);
+                          }}
+                        />{" "}
+                        {!Validations.height && ShowError === 1 && (
+                          <p className="error">
+                            error you must enter your height real
+                          </p>
+                        )}{" "}
+                        <input
+                          className="form-control"
+                          type="number"
+                          min="30"
+                          max="400"
+                          onChange={(event) => {
+                            SetWeightValue(event.target.value);
+                          }}
+                          placeholder="Enter your weight"
+                        />{" "}
+                        {!Validations.weight && ShowError === 1 && (
+                          <p className="error">
+                            error you must enter your weight real
+                          </p>
+                        )}{" "}
+                      </div>
+                      <div className="input-group mb-3">
+                        {" "}
+                        <select
+                          className="form-select form-control text-center"
+                          value={ExerciseValue}
+                          onChange={(event) => {
+                            SetExerciseValue(event.target.value);
+                          }}
+                        >
+                          <option value="" disabled>
+                            Select your daily routine
+                          </option>
+                          <option value="no exercise">
+                            no exercise(no type of exercise)
+                          </option>
+                          <option value="little exercise">
+                            little exercise(1 or 3 days a week)
+                          </option>
+                          <option value="moderate exercise">
+                            moderate exercise(3 or 5 days a week)
+                          </option>
+                          <option value="intense exercise">
+                            intense exercise(6 or 7 days a week)
+                          </option>
+                        </select>
+                        {!Validations.exercise && ShowError === 1 && (
+                          <p className="error">
+                            error you must enter your routine
+                          </p>
+                        )}{" "}
+                      </div>
+                      <div className="mt-4 d-flex justify-content-end">
+                        {" "}
+                        <button
+                          className="btn btn-success custom-button px-5"
+                          onClick={CaloriesCalculateHandler}
+                        >
+                          Calculate
+                        </button>{" "}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        {/* Edad */}
-        <div>
-          <label>Age:</label>
-          <input
-            type="number"
-            min="1"
-            max="90"
-            onChange={(event) => {
-              SetAgeValue(event.target.value);
-            }}
-          ></input>
-          {!Validations.age && ShowError === 1 && (
-            <p className="error">error you must enter your age real</p>
-          )}
-        </div>
-        {/* Altura */}
-        <div>
-          <label>Height (cm):</label>
-          <input
-            type="number"
-            min="50"
-            max="200"
-            onChange={(event) => {
-              SetHeightValue(event.target.value);
-            }}
-          ></input>
-          {!Validations.height && ShowError === 1 && (
-            <p className="error">error you must enter your height real</p>
-          )}
-        </div>
-
-        {/* Peso*/}
-        <div>
-          <label>Weight (kg):</label>
-          <input
-            type="number"
-            min="30"
-            max="400"
-            onChange={(event) => {
-              SetWeightValue(event.target.value);
-            }}
-          ></input>
-          {!Validations.weight && ShowError === 1 && (
-            <p className="error">error you must enter your weight real</p>
-          )}
-        </div>
-        {/* Actividad Fisica*/}
-        <div>
-          <label>How active are you daily?:</label>
-          <select
-            value={ExerciseValue}
-            onChange={(event) => {
-              SetExerciseValue(event.target.value);
-            }}
-          >
-            <option value="" disabled>
-              Select an option
-            </option>
-            <option value="no exercise">
-              no exercise(no type of exercise)
-            </option>
-            <option value="little exercise">
-              little exercise(1 or 3 days a week)
-            </option>
-            <option value="moderate exercise">
-              moderate exercise(3 or 5 days a week)
-            </option>
-            <option value="intense exercise">
-              intense exercise(6 or 7 days a week)
-            </option>
-          </select>
-          {!Validations.exercise && ShowError === 1 && (
-            <p className="error">error you must enter your routine</p>
-          )}
-        </div>
-      </form>
-      <div>
-        <button onClick={CaloriesCalculateHandler}>Enviar</button>
       </div>
 
       {ShowMensage && (
