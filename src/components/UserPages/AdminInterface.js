@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { firebaseApp } from "../../Credentials";
-
+import "./UserPages.css";
 import { useAuth } from "../../context/AuthContext";
 import {
   getFirestore,
@@ -93,24 +93,31 @@ function AdminInterface() {
         <button type="button" onClick={getBlog}>
           refresh
         </button>
-        <form onSubmit={saveData}>
-          <input
-            type="text"
-            name="adminName"
-            placeholder="Creator post"
-            onChange={inputCapture}
-            value={blog.adminName}
-          ></input>
-
-          <textarea
-            type="text"
-            name="blog"
-            placeholder="Enter blog"
-            onChange={inputCapture}
-            value={blog.blog}
-          ></textarea>
-          <button>{selectId === "" ? "Save" : "Update"}</button>
-        </form>
+        <div className="mb-5">
+          <form onSubmit={saveData}>
+            <input
+              type="text"
+              name="adminName"
+              placeholder="Creator post"
+              onChange={inputCapture}
+              value={blog.adminName}
+            ></input>
+            <div className="form-outline mb-4 w-75 p-3 blog">
+              <textarea
+                className="form-control "
+                rows="5"
+                type="text"
+                name="blog"
+                placeholder="Enter blog"
+                onChange={inputCapture}
+                value={blog.blog}
+              ></textarea>
+            </div>
+            <button className="btn btn-primary">
+              {selectId === "" ? "Save" : "Update"}
+            </button>
+          </form>
+        </div>
         <div>
           {list.map((blogList, i) => {
             return (

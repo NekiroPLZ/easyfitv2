@@ -1,20 +1,23 @@
-.UserNavBar{
-    align-items: center;
-    background: linear-gradient(to right, #3fa5e5, rgb(12, 178, 215) );
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;  
-  }
-.UserNavBar a{
-    margin-left: 82%;
-    margin-right: 60px;
-    color:black;
-  
-  }
-.UserNavBar img{
-    margin-bottom: -30px;
-  }
+.UserNavBar {
+  align-items: center;
+  background: linear-gradient(to right, #3fa5e5, rgb(12, 178, 215));
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+.UserNavBar a {
+  margin-left: 82%;
+  margin-right: 60px;
+  color: black;
+}
+.UserNavBar img {
+  margin-bottom: -30px;
+}
 
 .image {
-    width: 90%;
-    height: 800px;
-  }
+  width: 90%;
+  height: 800px;
+}
+
+.blog {
+  text-align: center;
+}
