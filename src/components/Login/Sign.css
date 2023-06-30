@@ -6,26 +6,31 @@
   border-radius: 1%;
   border-style: solid;
 }
-.Sign{
+.Sign {
   align-items: center;
-  background: linear-gradient(to right, #3fa5e5, rgb(12, 178, 215) );
+  background: linear-gradient(to right, #3fa5e5, rgb(12, 178, 215));
   border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;  
+  border-bottom-right-radius: 50px;
 }
-.Sign a{
+.Sign a {
   margin-left: 79%;
   margin-right: 60px;
-  color:black;
-
+  color: black;
 }
-.Sign img{
+.Sign img {
   margin-bottom: -30px;
 }
 
 .icon {
-margin-left: -24px;
-
+  margin-left: -24px;
 }
-.Main{
-  display: flex;
+.Main {
+  display: flexbox;
+}
+.moving-eye {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+.moving-eye-sign-up {
+  margin-bottom: 00px;
 }

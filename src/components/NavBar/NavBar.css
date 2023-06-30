@@ -1,19 +1,23 @@
-
-.NavBar{
+.NavBar {
   display: flex;
   align-items: center;
-   background: linear-gradient(to right, #3fa5e5, rgb(12, 178, 215) );
+  background: linear-gradient(to right, #3fa5e5, rgb(12, 178, 215));
   border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px; 
+  border-bottom-right-radius: 50px;
 }
 .NavBar > h1 {
   margin-right: 55%;
 }
-.NavBar a{
+.NavBar a {
   margin-right: 30px;
-  color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
 }
-.NavBar img{
+.NavBar img {
   margin-bottom: -30px;
- 
+}
+
+@media only screen and (max-width: 990px) {
+  .hidden-navBar-Logo {
+    display: none;
+  }
 }

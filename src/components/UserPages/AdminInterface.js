@@ -3,7 +3,6 @@ import { firebaseApp } from "../../Credentials";
 import "./UserPages.css";
 
 import { UseTheme } from "../../context/ThemeContext";
-import EasyFit from "../imagen/EasyFit.png";
 
 import { useAuth } from "../../context/AuthContext";
 import {
@@ -15,6 +14,7 @@ import {
   deleteDoc,
   getDoc,
 } from "firebase/firestore";
+import NavBar from "../NavBar/NavBar";
 const db = getFirestore(firebaseApp);
 function AdminInterface() {
   const initialValues = {
@@ -90,16 +90,11 @@ function AdminInterface() {
   console.log(loading);
 
   //Cambiar fondo
-  const { Theme, ThemeHandler, Theme1 } = UseTheme();
-  document.body.style.backgroundColor = Theme1.background;
-  document.body.style.color = Theme1.textColor;
 
   return (
     <div>
-      <div className="UserNavBar">
-        <a href="/">Home</a>
-        <img src={EasyFit} width={80} height={160}></img>
-      </div>
+      <NavBar />
+
       <div>
         <button type="button" onClick={getBlog}>
           refresh
@@ -145,9 +140,6 @@ function AdminInterface() {
         </div>
       </div>
       <button onClick={logouthandler}>Log Out</button>
-      <button onClick={ThemeHandler}>
-        {Theme === "dark" ? "Light Mode" : "Dark Mode"}
-      </button>
     </div>
   );
 }
