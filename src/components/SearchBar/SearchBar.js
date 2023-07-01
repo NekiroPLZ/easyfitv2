@@ -39,18 +39,23 @@ const SearchBar = () => {
   console.log(result);
   return (
     <div>
-      <div style={{ textAlign: "center" }}>
+      <div className="text-center mt-3">
         <h2>Search food calories by name</h2>
-
         <form className="">
-          <input
-            class="me-2"
-            type="search"
-            value={inputSearch}
-            onChange={inputSearchHandler}
-            placeholder="Search"
-            aria-label="Search"
-          />
+          <div class="d-flex flex-row align-items-center mb-4">
+            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+            <div class="form-outline flex-fill mb-0">
+              <input
+                className="form-control position-relative"
+                type="search"
+                value={inputSearch}
+                onChange={inputSearchHandler}
+                placeholder="Search"
+                aria-label="Search"
+              ></input>
+            </div>
+          </div>
+
           <button
             className="btn btn-outline-success"
             type="button"

@@ -13,6 +13,7 @@ import {
   doc,
   deleteDoc,
   getDoc,
+  updateDoc,
 } from "firebase/firestore";
 import NavBar from "../NavBar/NavBar";
 const db = getFirestore(firebaseApp);
@@ -32,13 +33,16 @@ function AdminInterface() {
   };
   const saveData = async (event) => {
     event.preventDefault();
-
-    try {
-      await addDoc(collection(db, "Blog"), {
-        ...blog,
-      });
-    } catch (error) {
-      console.log(error);
+    if (selectId === "") {
+      try {
+        await addDoc(collection(db, "Blog"), {
+          ...blog,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      await updateDoc(doc(db, "Blog", selectId), { ...blog });
     }
 
     setBlog(initialValues);
@@ -96,50 +100,123 @@ function AdminInterface() {
       <NavBar />
 
       <div>
-        <button type="button" onClick={getBlog}>
-          refresh
-        </button>
+        {" "}
         <div className="mb-5">
           <form onSubmit={saveData}>
-            <input
-              type="text"
-              name="adminName"
-              placeholder="Creator post"
-              onChange={inputCapture}
-              value={blog.adminName}
-            ></input>
-            <div className="form-outline mb-4 w-75 p-3 blog">
-              <textarea
-                className="form-control "
-                rows="5"
-                type="text"
-                name="blog"
-                placeholder="Enter blog"
-                onChange={inputCapture}
-                value={blog.blog}
-              ></textarea>
+            <div class="mb-3">
+              <div className="form-outline mt-2 w-75  blog">
+                <input
+                  type="text"
+                  name="adminName"
+                  className="form-control"
+                  id="exampleFormControlInput1"
+                  placeholder="Creator post"
+                  onChange={inputCapture}
+                  value={blog.adminName}
+                />
+              </div>
             </div>
-            <button className="btn btn-primary">
+            <div className="form-outline mb-4 w-75 pl-3 blog">
+              <div class="mb-3">
+                <textarea
+                  class="form-control"
+                  id="exampleFormControlTextarea1"
+                  rows="3"
+                  type="text"
+                  placeholder="Enter blog"
+                  onChange={inputCapture}
+                  value={blog.blog}
+                  name="blog"
+                ></textarea>
+              </div>
+            </div>
+
+            {/* <input
+            type="text"
+            name="adminName"
+            placeholder="Creator post"
+            onChange={inputCapture}
+            value={blog.adminName}
+          ></input>
+          <div className="form-outline mb-4 w-75 p-3 blog">
+            <textarea
+              className="form-control "
+              rows="5"
+              type="text"
+              name="blog"
+              placeholder="Enter blog"
+              onChange={inputCapture}
+              value={blog.blog}
+            ></textarea>
+          </div> */}
+            <button className="btn btn-success custom-button px-5">
               {selectId === "" ? "Save" : "Update"}
             </button>
           </form>
         </div>
+        <div className="text-center">
+          <button
+            className="btn btn-warning mb-3"
+            type="button"
+            onClick={getBlog}
+          >
+            refresh
+          </button>
+        </div>
         <div>
-          {list.map((blogList, i) => {
-            return (
-              <div key={i}>
-                <h2>{blogList.blog.adminName}</h2>
-                <p>{blogList.blog.blog}</p>
-
-                <button onClick={() => deleteBlog(blogList.id)}>Delete</button>
-                <button onClick={() => setSelectId(blogList.id)}>Update</button>
-                <hr></hr>
+          <div class="accordion" id="accordionExample">
+            <div class="">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  Blogs
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse show"
+                aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  {list.map((blogList, i) => {
+                    return (
+                      <div key={i}>
+                        <h2>{blogList.blog.adminName}</h2>
+                        <p>{blogList.blog.blog}</p>
+                        <button
+                          class="btn btn-danger"
+                          onClick={() => deleteBlog(blogList.id)}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          class="btn btn-primary "
+                          onClick={() => setSelectId(blogList.id)}
+                        >
+                          Update
+                        </button>
+                        <hr></hr>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            );
-          })}
+            </div>
+          </div>
         </div>
       </div>
-      <button onClick={logouthandler}>Log Out</button>
+      <div className="text-center mt-3">
+        <button class="btn btn-danger" onClick={logouthandler}>
+          Log Out
+        </button>
+      </div>
     </div>
   );
 }

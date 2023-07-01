@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { firebaseApp } from "../../Credentials";
-import { getFirestore, getDoc, getDocs, collection } from "firebase/firestore";
+import { getFirestore, getDocs, collection } from "firebase/firestore";
+import { UseTheme } from "../../context/ThemeContext";
+
 const db = getFirestore(firebaseApp);
 function BlogInformation() {
   const [list, setList] = useState([]);
@@ -22,12 +24,13 @@ function BlogInformation() {
   useEffect(() => {
     getBlog();
   }, []);
+
   return (
     <div>
       {" "}
       <div>
         <div class="accordion" id="accordionExample">
-          <div class="accordion-item">
+          <div class="">
             <h2 class="accordion-header" id="headingOne">
               <button
                 class="accordion-button"
@@ -37,7 +40,7 @@ function BlogInformation() {
                 aria-expanded="true"
                 aria-controls="collapseOne"
               >
-                Accordion Item #1
+                Blogs
               </button>
             </h2>
             <div

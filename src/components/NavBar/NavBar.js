@@ -23,14 +23,7 @@ function NavBar() {
                 </Link>
               </li>
             </ul>
-            {/* <form class="d-flex">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              </form> */}
+
             <div className="d-flex">
               <div className="navbar-nav me-auto mb-2 mb-lg-0">
                 <Link to="/Login" className="nav-link btn btn-outline-success">
