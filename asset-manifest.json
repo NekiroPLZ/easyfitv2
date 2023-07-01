@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/easyfitv2/static/css/main.914a55a5.css",
-    "main.js": "/easyfitv2/static/js/main.b3cff642.js",
-    "static/js/787.5cd22395.chunk.js": "/easyfitv2/static/js/787.5cd22395.chunk.js",
+    "main.js": "/easyfitv2/static/js/main.90baf633.js",
+    "static/js/787.8e379d8b.chunk.js": "/easyfitv2/static/js/787.8e379d8b.chunk.js",
     "static/media/Jay-Cutler-quad-stomp-1.png": "/easyfitv2/static/media/Jay-Cutler-quad-stomp-1.89f876e001167464d990.png",
     "static/media/Ronnie.jpg": "/easyfitv2/static/media/Ronnie.681b5414b94a5240e1c8.jpg",
     "static/media/Cbum.jpg": "/easyfitv2/static/media/Cbum.a1f54d36ce95585352ea.jpg",
     "static/media/logo.jpg": "/easyfitv2/static/media/logo.e25e3121df2bb4203430.jpg",
     "index.html": "/easyfitv2/index.html",
     "main.914a55a5.css.map": "/easyfitv2/static/css/main.914a55a5.css.map",
-    "main.b3cff642.js.map": "/easyfitv2/static/js/main.b3cff642.js.map",
-    "787.5cd22395.chunk.js.map": "/easyfitv2/static/js/787.5cd22395.chunk.js.map"
+    "main.90baf633.js.map": "/easyfitv2/static/js/main.90baf633.js.map",
+    "787.8e379d8b.chunk.js.map": "/easyfitv2/static/js/787.8e379d8b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.914a55a5.css",
-    "static/js/main.b3cff642.js"
+    "static/js/main.90baf633.js"
   ]
 }
