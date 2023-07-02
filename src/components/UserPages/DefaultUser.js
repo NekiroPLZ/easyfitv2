@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import EasyFit from "../imagen/EasyFit.png";
 import { firebaseApp } from "../../Credentials";
 import SearchBar from "../SearchBar/SearchBar";
+import NavBar from "../NavBar/NavBar";
 import { useAuth } from "../../context/AuthContext";
 import "./UserPages.css";
-import { UseTheme } from "../../context/ThemeContext";
 import {
   getFirestore,
   collection,
@@ -21,7 +20,13 @@ function DefaultUser() {
   const initialValues = {
     userName: "",
     food: "",
+    food1: "",
+    food2: "",
+    food3: "",
     calories: "",
+    calories1: "",
+    calories2: "",
+    calories3: "",
   };
 
   const [food, setFood] = useState(initialValues);
@@ -30,15 +35,19 @@ function DefaultUser() {
 
   const inputCapture = (event) => {
     const { name, value } = event.target;
-      setFood({ ...food, [name]: value });
+    setFood({ ...food, [name]: value });
   };
 
   //Formulario comida
   const saveData = async (event) => {
     event.preventDefault();
-    if(initialValues.userName === "" || initialValues.food === "" || initialValues.calories === ""){
-      alert("fill in the field")
-    }else{
+    // if (
+    //   initialValues.userName === "" ||
+    //   initialValues.food === "" ||
+    //   initialValues.calories === ""
+    // ) {
+    //   alert("fill in the field");
+    // } else {
     if (selectId === "") {
       try {
         await addDoc(collection(db, "Food"), {
@@ -50,11 +59,10 @@ function DefaultUser() {
     } else {
       await updateDoc(doc(db, "Food", selectId), { ...food });
     }
-
+    // }
     setFood(initialValues);
     setSelectId("");
   };
-}
 
   useEffect(() => {
     getFood();
@@ -66,6 +74,7 @@ function DefaultUser() {
       .then((response) => {
         const foodTest = response.docs.map((doc) => ({
           food: doc.data(),
+          calories: doc.data(),
           id: doc.id,
         }));
         console.log(foodTest);
@@ -86,7 +95,7 @@ function DefaultUser() {
       console.log("Error updating data", error);
     }
   };
-
+  console.log(list);
   useEffect(() => {
     if (selectId !== "") {
       updateFood("");
@@ -94,53 +103,148 @@ function DefaultUser() {
   });
 
   //VALIDATIONS AND LOGOUT
-  const { user, logout} = useAuth();
-  
+  const { logout } = useAuth();
+
   const logouthandler = async () => {
     await logout();
   };
-    //Cambiar fondo
-    const {Theme, ThemeHandler,Theme1} = UseTheme()
-    document.body.style.backgroundColor = Theme1.background;
-    document.body.style.color =  Theme1.textColor;
+  //Cambiar fondo
+
   return (
-    <>
-    <div className="UserNavBar">
-    <a href="/">Home</a>
-    <img src={EasyFit} width={80} height={160}></img>
-  </div>
     <div>
-      <SearchBar />
+      <NavBar />
+
       <div>
-        <h3>Enter food</h3>
-        <form onSubmit={saveData}>
-          <div>
-            <div>
-              <input
-                type="text"
-                name="userName"
-                placeholder="Creator post"
-                onChange={inputCapture}
-                value={food.userName}
-              ></input>
-              <input
-                type="text"
-                name="food"
-                placeholder="enter food"
-                onChange={inputCapture}
-                value={food.food}
-              ></input>
-              <input
-                type="text"
-                name="calories"
-                placeholder="Enter calories"
-                onChange={inputCapture}
-                value={food.calories}
-              ></input>
-              <button>{selectId === "" ? "Save" : "Update"}</button>
+        <SearchBar />
+        <div>
+          <button onClick={logouthandler}>log out</button>
+          {/* <form onSubmit={saveData} className="myform"> */}
+          <div className="app">
+            <div className="container mt-5">
+              <h1 className="text-center text-black mb-4">
+                Make a post with your favorites foods and calories
+              </h1>
+              <form onSubmit={saveData}>
+                <div className="row d-flex justify-content-center">
+                  <div className="col-md-7">
+                    <div className="bg-white">
+                      <div className="tab-content" id="myTabContent">
+                        <div
+                          className="tab-pane fade active show"
+                          id="faq_tab_1"
+                          role="tabpanel"
+                          aria-labelledby="faq_tab_1-tab"
+                        >
+                          {" "}
+                          <div className="container p-3">
+                            <div className="input-group mb-3 form-control text-center">
+                              {" "}
+                              <input
+                                type="text"
+                                name="userName"
+                                placeholder="Creator post"
+                                onChange={inputCapture}
+                                value={food.userName}
+                                className="form-control"
+                                required
+                              ></input>
+                            </div>
+                            <div className="input-group mb-3">
+                              <input
+                                type="text"
+                                name="food"
+                                placeholder="enter food"
+                                onChange={inputCapture}
+                                value={food.food}
+                                className="form-control"
+                                required
+                              ></input>{" "}
+                              <input
+                                type="number"
+                                name="calories"
+                                placeholder="Enter calories"
+                                onChange={inputCapture}
+                                value={food.calories}
+                                className="form-control"
+                                required
+                              ></input>{" "}
+                            </div>{" "}
+                            <div className="input-group mb-3">
+                              <input
+                                type="text"
+                                name="food1"
+                                placeholder="enter food"
+                                onChange={inputCapture}
+                                value={food.food1}
+                                className="form-control"
+                                required
+                              ></input>{" "}
+                              <input
+                                type="number"
+                                name="calories1"
+                                placeholder="Enter calories"
+                                onChange={inputCapture}
+                                value={food.calories1}
+                                className="form-control"
+                                required
+                              ></input>{" "}
+                            </div>{" "}
+                            <div className="input-group mb-3">
+                              <input
+                                type="text"
+                                name="food2"
+                                placeholder="enter food"
+                                onChange={inputCapture}
+                                value={food.food2}
+                                className="form-control"
+                                required
+                              ></input>{" "}
+                              <input
+                                type="number"
+                                name="calories2"
+                                placeholder="Enter calories"
+                                onChange={inputCapture}
+                                value={food.calories2}
+                                className="form-control"
+                                required
+                              ></input>{" "}
+                            </div>{" "}
+                            <div className="input-group mb-3">
+                              <input
+                                type="text"
+                                name="food3"
+                                placeholder="enter food"
+                                onChange={inputCapture}
+                                value={food.food3}
+                                className="form-control"
+                                required
+                              ></input>{" "}
+                              <input
+                                type="number"
+                                name="calories3"
+                                placeholder="Enter calories"
+                                onChange={inputCapture}
+                                value={food.calories3}
+                                className="form-control"
+                                required
+                              ></input>{" "}
+                            </div>
+                            <div className="text-center">
+                              {" "}
+                              <button className="btn btn-success custom-button px-5">
+                                {selectId === "" ? "Save" : "Update"}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-        </form>
+        </div>
       </div>
       <div>
         <h2>Food list</h2>
@@ -155,7 +259,19 @@ function DefaultUser() {
 
                   <p>Food Name: {foodList.food.food}</p>
                   <p>Food calories: {foodList.food.calories}</p>
-
+                  <p>Food Name: {foodList.food.food1}</p>
+                  <p>Food calories: {foodList.food.calories1}</p>
+                  <p>Food Name: {foodList.food.food2}</p>
+                  <p>Food calories: {foodList.food.calories2}</p>
+                  <p>Food Name: {foodList.food.food3}</p>
+                  <p>Food calories: {foodList.food.calories3}</p>
+                  <h2>
+                    Total calories:
+                    {parseInt(foodList.food.calories) +
+                      parseInt(foodList.food.calories1) +
+                      parseInt(foodList.food.calories2) +
+                      parseInt(foodList.food.calories3)}
+                  </h2>
                   <button onClick={() => deleteFood(foodList.id)}>
                     Delete
                   </button>
@@ -169,10 +285,7 @@ function DefaultUser() {
           </div>
         </div>
       </div>
-      <button onClick={logouthandler}>Log Out</button>
-      <button onClick={ThemeHandler}>{Theme === "dark" ? "Light Mode" : "Dark Mode"}</button>  
     </div>
-    </>
   );
 }
 

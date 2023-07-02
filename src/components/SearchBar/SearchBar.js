@@ -39,25 +39,37 @@ const SearchBar = () => {
   console.log(result);
   return (
     <div>
-      <div>
-        <h2>Search</h2>
-        <input
-          type="text"
-          value={inputSearch}
-          onChange={inputSearchHandler}
-          placeholder="SEARCH FOOD..."
-        ></input>
-        <button type="button" onClick={getFoodCalories}>
-          GET FOOD
-        </button>
-        {showMessage &&
-          result.map((food, index) => {
-            return (
-              <div key={index}>
-                <h2>{`${inputSearch} has ${food} Calories.`}</h2>
-              </div>
-            );
-          })}
+      <div style={{ textAlign: "center" }}>
+        <h2>Search food calories by name</h2>
+
+        <form className="">
+          <input
+            class="me-2"
+            type="search"
+            value={inputSearch}
+            onChange={inputSearchHandler}
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button
+            className="btn btn-outline-success"
+            type="button"
+            onClick={getFoodCalories}
+          >
+            Search
+          </button>
+        </form>
+        <div style={{ textAlign: "center" }}>
+          <h2>{inputSearch}</h2>
+          {showMessage &&
+            result.map((food, index) => {
+              return (
+                <div key={index}>
+                  <h2>{`${food} Calories.`}</h2>
+                </div>
+              );
+            })}
+        </div>
       </div>
     </div>
   );
