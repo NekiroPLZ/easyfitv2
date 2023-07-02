@@ -71,7 +71,7 @@ function CaloriesCalculator() {
   return (
     <div>
       {/* Mensajes */}
-      <div className="app">
+      <div className="app ">
         <div className="container mt-5">
           <h1 className="text-center text-black mb-4">
             Enter your information to calculate your calories
