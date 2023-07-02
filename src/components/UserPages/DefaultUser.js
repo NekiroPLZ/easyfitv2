@@ -92,9 +92,9 @@ function DefaultUser() {
   console.log(list);
   useEffect(() => {
     if (selectId !== "") {
-      updateFood("");
+      updateFood(selectId);
     }
-  });
+  },[selectId]);
 
   //VALIDATIONS AND LOGOUT
   const { logout } = useAuth();
