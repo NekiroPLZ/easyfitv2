@@ -1,3 +1,5 @@
+/* eslint-disable no-sequences */
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 //Iconos/Imagen
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

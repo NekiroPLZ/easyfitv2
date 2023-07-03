@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { firebaseApp } from "../../Credentials";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
-import { UseTheme } from "../../context/ThemeContext";
 
 const db = getFirestore(firebaseApp);
 function BlogInformation() {

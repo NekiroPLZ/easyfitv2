@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { firebaseApp } from "../../Credentials";
 import "./UserPages.css";
 
-import { UseTheme } from "../../context/ThemeContext";
-
 import { useAuth } from "../../context/AuthContext";
 import {
   getFirestore,

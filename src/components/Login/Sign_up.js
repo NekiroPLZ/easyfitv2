@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -22,13 +23,16 @@ function Sign_up() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    if (user.email.includes('@' && ".com")) {
-    try {
-      await signup(user.email, user.password);
-      navigate("/");
-    } catch (error) {
-      alert(error);
-    } }else{alert("Falta .com o Ingresar email")}
+    if (user.email.includes("@" && ".com")) {
+      try {
+        await signup(user.email, user.password);
+        navigate("/");
+      } catch (error) {
+        alert(error);
+      }
+    } else {
+      alert("Falta .com o Ingresar email");
+    }
   };
   //Modo oscuro
 
