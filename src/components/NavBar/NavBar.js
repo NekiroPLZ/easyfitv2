@@ -29,13 +29,22 @@ function NavBar() {
                 <Link to="/Login" className="nav-link btn btn-outline-success">
                   Login
                 </Link>
-
-                <button
-                  className="ms-2 nav-link btn btn-outline-dark"
-                  onClick={ThemeHandler}
-                >
-                  {Theme === "dark" ? "Light Mode" : "Dark Mode"}
-                </button>
+                <div className="d-flex">
+                  <div className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <Link
+                      to="/Questions"
+                      className="nav-link btn btn-outline-success"
+                    >
+                      Questions
+                    </Link>
+                    <button
+                      className="ms-2 nav-link btn btn-outline-dark"
+                      onClick={ThemeHandler}
+                    >
+                      {Theme === "dark" ? "Light Mode" : "Dark Mode"}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -9,6 +9,7 @@ import AdminInterface from "./components/UserPages/AdminInterface";
 import { AuthProv } from "./context/AuthContext";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import { ThemeProvider } from "./context/ThemeContext";
+import Questions from "./components/Questions/Questions";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
     ),
     errorElement: <h1>Error</h1>,
   },
+  { path: "/Questions", element: <Questions /> },
 ]);
 function App() {
   return (
