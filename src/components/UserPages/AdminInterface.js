@@ -27,12 +27,11 @@ function AdminInterface() {
   const [list, setList] = useState([]);
   const [selectId, setSelectId] = useState("");
 
-
   const inputCapture = (event) => {
     const { name, value } = event.target;
     setBlog({ ...blog, [name]: value });
   };
-  
+
   const saveData = async (event) => {
     event.preventDefault();
     if (selectId === "") {
@@ -78,7 +77,7 @@ function AdminInterface() {
     if (selectId !== "") {
       updateBlog(selectId);
     }
-  },[selectId]);
+  }, [selectId]);
 
   const deleteBlog = async (id) => {
     await deleteDoc(doc(db, "Blog", id));
@@ -181,7 +180,7 @@ function AdminInterface() {
               </h2>
               <div
                 id="collapseOne"
-                class="accordion-collapse collapse show"
+                class="accordion-collapse collapse"
                 aria-labelledby="headingOne"
                 data-bs-parent="#accordionExample"
               >

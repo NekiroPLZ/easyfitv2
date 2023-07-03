@@ -7,8 +7,6 @@ const db = getFirestore(firebaseApp);
 function BlogInformation() {
   const [list, setList] = useState([]);
 
-
-
   const getBlog = () => {
     const blogCollection = collection(db, "Blog");
     getDocs(blogCollection)
